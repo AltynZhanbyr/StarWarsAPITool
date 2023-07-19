@@ -23,7 +23,10 @@ class GetRemoteStarWarsStarshipUseCase @Inject constructor(
                 Log.d("GetRemoteStarWarsStarshipUseCase", "here")
                 it.toStarship()
             }
-            emit(Resource.Success(starships))
+            if(starships.isNotEmpty())
+                emit(Resource.Success(starships))
+            else
+                emit(Resource.Error("Not Found"))
         }catch (e: HttpException){
             emit(Resource.Error<List<Starship>>(e.localizedMessage ?: "An unexpected error occurred"))
         }catch (e: IOException){

@@ -60,6 +60,8 @@ class SearchScreenViewModel @Inject constructor(
             getRemoteStarWarsStarshipUseCase(name).collect(){res->
                 if(res is Resource.Success)
                     _starshipState.value = StarshipState(starships = res.data)
+                if(res is Resource.Error)
+                    _starshipState.value = StarshipState(errorMessage = res.message?:"Unexpected Error")
             }
         }
     }
