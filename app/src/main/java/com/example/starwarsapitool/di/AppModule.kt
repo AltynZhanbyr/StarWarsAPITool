@@ -4,6 +4,7 @@ import com.example.starwarsapitool.data.remote.StarWarsApi
 import com.example.starwarsapitool.data.repository.RemoteStarWarsRepositoryImpl
 import com.example.starwarsapitool.domain.repository.RemoteStarWarsRepository
 import com.example.starwarsapitool.domain.use_case.GetRemoteStarWarsCharacterUseCase
+import com.example.starwarsapitool.domain.use_case.GetRemoteStarWarsStarshipUseCase
 import com.example.starwarsapitool.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -37,5 +38,11 @@ object AppModule {
     @Singleton
     fun providesGetRemoteStarWarsCharacterUseCase(repository: RemoteStarWarsRepository): GetRemoteStarWarsCharacterUseCase{
         return GetRemoteStarWarsCharacterUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun providesGetRemoteStarWarsStarshipUseCase(repository: RemoteStarWarsRepository): GetRemoteStarWarsStarshipUseCase {
+        return GetRemoteStarWarsStarshipUseCase(repository)
     }
 }

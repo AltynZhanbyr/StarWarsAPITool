@@ -1,5 +1,6 @@
 package com.example.starwarsapitool.domain.use_case
 
+import android.util.Log
 import com.example.starwarsapitool.data.dto.CharacterDto
 import com.example.starwarsapitool.data.dto.toCharacter
 import com.example.starwarsapitool.domain.model.Character
@@ -17,10 +18,13 @@ class GetRemoteStarWarsCharacterUseCase @Inject constructor(
     operator fun invoke(name:String): Flow<Resource<List<Character>>> = flow{
         try{
             emit(Resource.Loading())
-            val characters:List<Character> = remoteStarWarsRepository.getCharacterByName(name).results.map {
+            val characters:List<Character> = remoteStarWarsRepository.getCharacterByName(name).map {
                 it.toCharacter()
             }
-            emit(Resource.Success(characters))
+            if(characters.isNotEmpty())
+                emit(Resource.Success(characters))
+            else
+                emit(Resource.Error( "Not found"))
         }catch (e:HttpException){
             emit(Resource.Error(e.localizedMessage ?: "An unexpected error occurred"))
         }catch (e:IOException){

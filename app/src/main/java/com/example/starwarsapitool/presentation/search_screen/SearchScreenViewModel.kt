@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.starwarsapitool.domain.model.Character
 import com.example.starwarsapitool.domain.use_case.GetRemoteStarWarsCharacterUseCase
+import com.example.starwarsapitool.domain.use_case.GetRemoteStarWarsStarshipUseCase
 import com.example.starwarsapitool.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -18,11 +19,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchScreenViewModel @Inject constructor(
-    private val getRemoteStarWarsCharacterUseCase: GetRemoteStarWarsCharacterUseCase
+    private val getRemoteStarWarsCharacterUseCase: GetRemoteStarWarsCharacterUseCase,
+    private val getRemoteStarWarsStarshipUseCase: GetRemoteStarWarsStarshipUseCase
 ):ViewModel() {
 
     private val _charactersState = mutableStateOf<CharacterState>(CharacterState())
     val characterState = _charactersState
+
+    private val _starshipState = mutableStateOf<StarshipState>(StarshipState())
+    val starshipState = _starshipState
 
     private val _searchText = mutableStateOf("")
     val searchText = _searchText
@@ -34,9 +39,12 @@ class SearchScreenViewModel @Inject constructor(
                     is Resource.Loading ->
                         _charactersState.value = CharacterState(isLoading = true)
                     is Resource.Success ->
-                        searchCharacterByNameInCollection(res.data,name)
-                    is Resource.Error ->
-                        _charactersState.value = CharacterState(errorMessage = res.message?:"Unexpected Error occurred")
+                        _charactersState.value = CharacterState(characters = res.data)
+                    is Resource.Error -> {
+                        _charactersState.value =
+                            CharacterState(errorMessage = res.message.toString())
+                        searchStarshipByName(name)
+                    }
                 }
             }
         }
@@ -46,19 +54,13 @@ class SearchScreenViewModel @Inject constructor(
         _searchText.value = name
     }
 
-    private suspend fun searchCharacterByNameInCollection(characters: List<Character>?, name: String) {
-        val newCharacters = mutableListOf<Character>()
-        var isCharacterExists = false
-        characters?.forEach {
-            if(it.name.contains(name, ignoreCase = true)){
-                isCharacterExists = true
-                Log.d("SearchScreenViewModel", it.name)
-               newCharacters.add(it)
+    private fun searchStarshipByName(name: String) {
+        Log.d("SearchScreenViewModel","here")
+        viewModelScope.launch(Dispatchers.IO) {
+            getRemoteStarWarsStarshipUseCase(name).collect(){res->
+                if(res is Resource.Success)
+                    _starshipState.value = StarshipState(starships = res.data)
             }
         }
-        if(!isCharacterExists)
-            _charactersState.value = CharacterState("There is no such character")
-        else
-            _charactersState.value = CharacterState(characters = newCharacters)
     }
 }
