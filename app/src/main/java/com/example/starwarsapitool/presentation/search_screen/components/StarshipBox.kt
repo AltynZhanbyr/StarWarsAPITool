@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.example.starwarsapitool.domain.model.Character
 import com.example.starwarsapitool.domain.model.Starship
@@ -28,13 +29,15 @@ import com.example.starwarsapitool.domain.model.Starship
 @Composable
 fun StarshipBox(
     starship: Starship,
+    icon:ImageVector,
+    color:Color,
     onAddToFavoriteClickListener:(Starship)->Unit
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .padding(5.dp),
+            .padding(8.dp),
         elevation = 10.dp,
         shape = RoundedCornerShape(10.dp)
     ){
@@ -59,7 +62,7 @@ fun StarshipBox(
                     Text("Passengers: ${starship.passengers}")
                 }
                 Icon(
-                    imageVector = Icons.Default.Favorite,
+                    imageVector = icon,
                     contentDescription = null,
                     modifier = Modifier
                         .weight(0.2f)
@@ -67,6 +70,7 @@ fun StarshipBox(
                         .clickable {
                             onAddToFavoriteClickListener(starship)
                         },
+                    tint = color
                 )
             }
         }

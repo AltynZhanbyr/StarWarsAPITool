@@ -11,4 +11,4 @@ data class Starship(
     val model:String,
     val manufacturer:String,
     val passengers:String
-)
+):StarWarsObject

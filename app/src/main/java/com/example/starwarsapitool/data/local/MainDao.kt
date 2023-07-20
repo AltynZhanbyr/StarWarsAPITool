@@ -29,6 +29,9 @@ interface MainDao {
     @Query("select * from character_table")
     fun getAllCharacters(): Flow<List<Character>>
 
+    @Query("select * from character_table WHERE name = :name")
+    suspend fun getCharacterByName(name:String):Character?
+
     //Starship table SQL Commands:
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -45,5 +48,8 @@ interface MainDao {
 
     @Query("select * from starship_table")
     fun getAllStarships(): Flow<List<Starship>>
+
+    @Query("select * from starship_table WHERE name = :name")
+    suspend fun getStarshipByName(name:String):Starship?
 
 }

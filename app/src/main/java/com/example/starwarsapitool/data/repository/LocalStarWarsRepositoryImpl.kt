@@ -27,6 +27,10 @@ class LocalStarWarsRepositoryImpl @Inject constructor(
         return db.getDao().updateCharacter(character)
     }
 
+    override suspend fun getCharacterByName(name: String):Character? {
+        return db.getDao().getCharacterByName(name)
+    }
+
     override fun getAllCharacters(): Flow<List<Character>> {
         return db.getDao().getAllCharacters()
     }
@@ -46,6 +50,10 @@ class LocalStarWarsRepositoryImpl @Inject constructor(
 
     override suspend fun updateStarship(starship: Starship) {
         return db.getDao().updateStarship(starship)
+    }
+
+    override suspend fun getStarshipByName(name: String): Starship? {
+        return db.getDao().getStarshipByName(name)
     }
 
     override fun getAllStarships(): Flow<List<Starship>> {

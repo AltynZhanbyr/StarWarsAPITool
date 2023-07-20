@@ -6,5 +6,7 @@ data class AllLocalUseCases(
     val getLocalStarWarsAllCharactersUseCase: GetLocalStarWarsAllCharactersUseCase,
     val deleteLocalStarWarsStarshipUseCase:DeleteLocalStarWarsStarshipUseCase,
     val insertLocalStarWarsStarshipUseCase: InsertLocalStarWarsStarshipUseCase,
-    val getLocalStarWarsAllStarshipsUseCase: GetLocalStarWarsAllStarshipsUseCase
+    val getLocalStarWarsAllStarshipsUseCase: GetLocalStarWarsAllStarshipsUseCase,
+    val getLocalStarWarsCharacterByNameUseCase: GetLocalStarWarsCharacterByNameUseCase,
+    val getLocalStarWarsStarshipByNameUseCase: GetLocalStarWarsStarshipByNameUseCase
 )

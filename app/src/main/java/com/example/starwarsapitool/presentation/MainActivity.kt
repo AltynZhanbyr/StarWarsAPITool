@@ -30,6 +30,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.starwarsapitool.presentation.favorite_screen.FavoriteScreen
 import com.example.starwarsapitool.presentation.search_screen.SearchScreen
 import com.example.starwarsapitool.presentation.ui.theme.StarWarsAPIToolTheme
 import com.example.starwarsapitool.utils.Constants
@@ -85,7 +86,7 @@ class MainActivity : ComponentActivity() {
                                 SearchScreen(snackbarHostState,coroutineScope)
                             }
                             composable(Constants.favoriteScreen){
-                                Text("Search screen")
+                                FavoriteScreen()
                             }
                         }
                     }

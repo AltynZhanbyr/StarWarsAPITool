@@ -15,6 +15,8 @@ import com.example.starwarsapitool.domain.use_case.DeleteLocalStarWarsCharacterU
 import com.example.starwarsapitool.domain.use_case.DeleteLocalStarWarsStarshipUseCase
 import com.example.starwarsapitool.domain.use_case.GetLocalStarWarsAllCharactersUseCase
 import com.example.starwarsapitool.domain.use_case.GetLocalStarWarsAllStarshipsUseCase
+import com.example.starwarsapitool.domain.use_case.GetLocalStarWarsCharacterByNameUseCase
+import com.example.starwarsapitool.domain.use_case.GetLocalStarWarsStarshipByNameUseCase
 import com.example.starwarsapitool.domain.use_case.GetRemoteStarWarsCharacterUseCase
 import com.example.starwarsapitool.domain.use_case.GetRemoteStarWarsStarshipUseCase
 import com.example.starwarsapitool.domain.use_case.InsertLocalStarWarsCharacterUseCase
@@ -71,12 +73,14 @@ object AppModule {
     @Singleton
     fun provideAllLocalUseCases(repository: LocalStarWarsRepository):AllLocalUseCases{
         return AllLocalUseCases(
-            deleteLocalStarWarsCharacterUseCase = DeleteLocalStarWarsCharacterUseCase(),
-            deleteLocalStarWarsStarshipUseCase = DeleteLocalStarWarsStarshipUseCase(),
+            deleteLocalStarWarsCharacterUseCase = DeleteLocalStarWarsCharacterUseCase(repository),
+            deleteLocalStarWarsStarshipUseCase = DeleteLocalStarWarsStarshipUseCase(repository),
             insertLocalStarWarsCharacterUseCase = InsertLocalStarWarsCharacterUseCase(repository),
             insertLocalStarWarsStarshipUseCase = InsertLocalStarWarsStarshipUseCase(repository),
-            getLocalStarWarsAllCharactersUseCase = GetLocalStarWarsAllCharactersUseCase(),
-            getLocalStarWarsAllStarshipsUseCase = GetLocalStarWarsAllStarshipsUseCase()
+            getLocalStarWarsAllCharactersUseCase = GetLocalStarWarsAllCharactersUseCase(repository),
+            getLocalStarWarsAllStarshipsUseCase = GetLocalStarWarsAllStarshipsUseCase(repository),
+            getLocalStarWarsCharacterByNameUseCase = GetLocalStarWarsCharacterByNameUseCase(repository),
+            getLocalStarWarsStarshipByNameUseCase = GetLocalStarWarsStarshipByNameUseCase(repository)
         )
     }
 

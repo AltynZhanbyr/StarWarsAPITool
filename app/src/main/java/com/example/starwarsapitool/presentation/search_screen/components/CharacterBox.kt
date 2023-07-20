@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -21,12 +22,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.example.starwarsapitool.domain.model.Character
 
 @Composable
 fun CharacterBox(
     character: Character,
+    icon:ImageVector,
+    color:Color,
     onAddToFavoriteClickListener:(Character)->Unit
 ) {
     Card(
@@ -56,15 +60,16 @@ fun CharacterBox(
                     Text("Gender: ${character.gender}")
                     Text("Starships: ${character.starships}")
                 }
-                Image(
-                    imageVector = Icons.Default.Favorite,
+                Icon(
+                    imageVector = icon,
                     contentDescription = null,
                     modifier = Modifier
                         .weight(0.2f)
                         .height(25.dp)
                         .clickable {
                             onAddToFavoriteClickListener(character)
-                        }
+                        },
+                    tint = color
                 )
             }
         }

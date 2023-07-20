@@ -10,6 +10,7 @@ interface LocalStarWarsRepository {
     suspend fun deleteCharacter(character: Character)
     suspend fun deleteAllCharacters()
     suspend fun updateCharacter(character: Character)
+    suspend fun getCharacterByName(name:String):Character?
     fun getAllCharacters(): Flow<List<Character>>
 
     //Starship methods
@@ -17,6 +18,7 @@ interface LocalStarWarsRepository {
     suspend fun deleteStarship(starship: Starship)
     suspend fun deleteAllStarships()
     suspend fun updateStarship(starship: Starship)
+    suspend fun getStarshipByName(name:String):Starship?
     fun getAllStarships():Flow<List<Starship>>
 
 }

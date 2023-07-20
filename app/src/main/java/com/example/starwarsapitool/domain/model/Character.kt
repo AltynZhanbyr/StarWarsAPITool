@@ -10,4 +10,4 @@ data class Character(
     val name:String,
     val gender:String,
     val starships:Int
-)
+):StarWarsObject

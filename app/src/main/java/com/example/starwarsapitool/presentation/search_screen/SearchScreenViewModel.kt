@@ -56,15 +56,21 @@ class SearchScreenViewModel @Inject constructor(
 
     fun insertStarship(starship: Starship){
         viewModelScope.launch {
-            allLocalUseCases.insertLocalStarWarsStarshipUseCase(starship)
-            delay(1000L)
+            val existingStarship = allLocalUseCases.getLocalStarWarsStarshipByNameUseCase(starship.name)
+            if(existingStarship==null){
+                allLocalUseCases.insertLocalStarWarsStarshipUseCase(starship)
+                delay(1000L)
+            }
         }
     }
 
     fun insertCharacter(character: Character){
         viewModelScope.launch {
-            allLocalUseCases.insertLocalStarWarsCharacterUseCase(character)
-            delay(1000L)
+            val existingCharacter = allLocalUseCases.getLocalStarWarsCharacterByNameUseCase(character.name)
+            if(existingCharacter==null){
+                allLocalUseCases.insertLocalStarWarsCharacterUseCase(character)
+                delay(1000L)
+            }
         }
     }
 
@@ -73,7 +79,6 @@ class SearchScreenViewModel @Inject constructor(
     }
 
     private fun searchStarshipByName(name: String) {
-        Log.d("SearchScreenViewModel","here")
         viewModelScope.launch(Dispatchers.IO) {
             getRemoteStarWarsStarshipUseCase(name).collect(){res->
                 if(res is Resource.Success)
