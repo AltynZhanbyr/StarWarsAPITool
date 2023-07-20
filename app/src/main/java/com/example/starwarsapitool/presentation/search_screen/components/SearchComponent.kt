@@ -46,7 +46,7 @@ fun SearchComponent(
             Button(onClick = {
                 onSearchClickListener(searchState)
             },
-                enabled = searchState.length>=2 && searchState.isNotEmpty(),
+                enabled = searchState.length>=2 && searchState.isNotBlank(),
                 modifier = Modifier.weight(0.4f)
             ) {
                 Text(text = "Search")

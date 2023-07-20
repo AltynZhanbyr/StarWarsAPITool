@@ -26,7 +26,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.starwarsapitool.domain.model.Character
 import com.example.starwarsapitool.domain.model.StarWarsObject
@@ -61,7 +63,9 @@ fun FavoriteScreen(
            itemsIndexed(objects){_,obj->
                Spacer(modifier = Modifier.height(10.dp))
                Text(
-                   obj.second,
+                   text = obj.second,
+                   fontWeight = FontWeight.Bold,
+                   fontSize = 25.sp
                )
                Spacer(modifier = Modifier.height(10.dp))
                obj.first.forEach {starWarsObject ->
