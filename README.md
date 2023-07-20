@@ -4,14 +4,14 @@
 
 The Star Wars Search App is a simple application that allows you to search for characters and starships from the Star Wars universe. The app is built using Jetpack Compose and follows the MVVM (Model-View-ViewModel) clean architecture pattern. It utilizes the swapi.dev API as the data source for Star Wars-related information and implements a Room Database to store and manage your favorite characters and starships.
 
-##Features
+#Features
 Search for Star Wars characters and starships.
 View detailed information about each character and starship.
 Easily navigate through search results.
 Add characters and starships to the Favorites panel.
 View and manage your favorite characters and starships in the Favorites panel.
 
-##Architecture
+#Architecture
 The Star Wars Search App follows the MVVM (Model-View-ViewModel) clean architecture pattern, which provides a clear separation of concerns and enhances testability and maintainability. The key components of the architecture are:
 
 Model: Represents the data and business logic of the application. It handles data retrieval from the API and interacts with the local database.
