@@ -28,7 +28,7 @@ Room: Provides an abstraction layer over SQLite to handle local data storage.
 Make sure you have the appropriate dependencies configured in your project before running the app.
 
 ## API Usage
-The Sta rWars API Tool uses the swapi.dev API as its data source. The API provides information about characters, starships, planets, and more from the Star Wars universe. To learn more about the API and explore its endpoints, visit swapi.dev.
+The Star Wars API Tool uses the swapi.dev API as its data source. The API provides information about characters, starships, planets, and more from the Star Wars universe. To learn more about the API and explore its endpoints, visit swapi.dev.
 
 ## Database
 The Star Wars API Tool implements a Room Database to store your favorite characters and starships. The database allows you to add, retrieve, and delete your favorite items in a persistent manner.
