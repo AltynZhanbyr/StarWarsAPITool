@@ -6,11 +6,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.starwarsapitool.domain.model.Character
+import com.example.starwarsapitool.domain.model.Starship
+import com.example.starwarsapitool.domain.use_case.AllLocalUseCases
 import com.example.starwarsapitool.domain.use_case.GetRemoteStarWarsCharacterUseCase
 import com.example.starwarsapitool.domain.use_case.GetRemoteStarWarsStarshipUseCase
 import com.example.starwarsapitool.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -20,7 +23,8 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchScreenViewModel @Inject constructor(
     private val getRemoteStarWarsCharacterUseCase: GetRemoteStarWarsCharacterUseCase,
-    private val getRemoteStarWarsStarshipUseCase: GetRemoteStarWarsStarshipUseCase
+    private val getRemoteStarWarsStarshipUseCase: GetRemoteStarWarsStarshipUseCase,
+    private val allLocalUseCases: AllLocalUseCases
 ):ViewModel() {
 
     private val _charactersState = mutableStateOf<CharacterState>(CharacterState())
@@ -47,6 +51,20 @@ class SearchScreenViewModel @Inject constructor(
                     }
                 }
             }
+        }
+    }
+
+    fun insertStarship(starship: Starship){
+        viewModelScope.launch {
+            allLocalUseCases.insertLocalStarWarsStarshipUseCase(starship)
+            delay(1000L)
+        }
+    }
+
+    fun insertCharacter(character: Character){
+        viewModelScope.launch {
+            allLocalUseCases.insertLocalStarWarsCharacterUseCase(character)
+            delay(1000L)
         }
     }
 

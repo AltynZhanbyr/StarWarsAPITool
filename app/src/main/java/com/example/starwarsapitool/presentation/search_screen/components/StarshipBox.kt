@@ -30,7 +30,6 @@ fun StarshipBox(
     starship: Starship,
     onAddToFavoriteClickListener:(Starship)->Unit
 ) {
-    var clicked = false
     Card(
         modifier = Modifier
             .fillMaxWidth()
