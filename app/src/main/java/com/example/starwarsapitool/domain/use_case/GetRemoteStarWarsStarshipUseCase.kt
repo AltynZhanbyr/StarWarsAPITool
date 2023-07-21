@@ -19,10 +19,7 @@ class GetRemoteStarWarsStarshipUseCase @Inject constructor(
     operator fun invoke(name:String): Flow<Resource<List<Starship>>> = flow{
         try{
             emit(Resource.Loading())
-            val starships:List<Starship> = remoteStarWarsRepository.getStarshipByName(name).map {
-                Log.d("GetRemoteStarWarsStarshipUseCase", "here")
-                it.toStarship()
-            }
+            val starships:List<Starship> = remoteStarWarsRepository.getStarshipByName(name)
             if(starships.isNotEmpty())
                 emit(Resource.Success(starships))
             else

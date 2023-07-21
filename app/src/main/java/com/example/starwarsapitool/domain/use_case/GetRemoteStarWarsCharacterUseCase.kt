@@ -18,9 +18,7 @@ class GetRemoteStarWarsCharacterUseCase @Inject constructor(
     operator fun invoke(name:String): Flow<Resource<List<Character>>> = flow{
         try{
             emit(Resource.Loading())
-            val characters:List<Character> = remoteStarWarsRepository.getCharacterByName(name).map {
-                it.toCharacter()
-            }
+            val characters:List<Character> = remoteStarWarsRepository.getCharacterByName(name)
             if(characters.isNotEmpty())
                 emit(Resource.Success(characters))
             else
