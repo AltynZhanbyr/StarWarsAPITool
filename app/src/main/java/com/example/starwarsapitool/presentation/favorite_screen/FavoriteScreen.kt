@@ -98,7 +98,7 @@ fun <T> ObjectBoxes(
             isAlertDialogActive.value = true
         }
         if(isAlertDialogActive.value) {
-            CustomAlertDialog(isAlertDialogActive,title = "Delete", message = "Are you sure?", obj = obj) {
+            CustomAlertDialog(isAlertDialogActive,title = "Deleting Starship", message = "Are you sure?", obj = obj) {
                 onDeleteClickListener(it)
             }
         }
